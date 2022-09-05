@@ -21,30 +21,30 @@ def get_filename(url):
         return url.rsplit('/', 1)[1]
 
 # Filepaths
-outdir = r"C:\\Users\\JohannesWilbertz\\OneDrive - Ksilink\\ML_learning\\Ukraine Fire Map\\"
+outdir = r"C:\\Users\\JohannesWilbertz\\OneDrive - Ksilink\\Image-Data-Analysis\\Python\Map_Plotting\\Map_Plotting\\"
 
-# # File locations
-# url_list = ["https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Europe_24h.csv" ,
-#             "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Europe_48h.csv",
-#             "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Europe_7d.csv"
-#             ]
+# File locations
+url_list = ["https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Europe_24h.csv" ,
+            "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Europe_48h.csv",
+            "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Europe_7d.csv"
+            ]
 
-# # Create folder if it does no exist
-# if not os.path.exists(outdir):
-#     os.makedirs(outdir)
+# Create folder if it does no exist
+if not os.path.exists(outdir):
+    os.makedirs(outdir)
 
-# # Download files
-# for url in url_list:
-#     # Parse filename
-#     fname = get_filename(url)
-#     outfp = os.path.join(outdir, fname)
-#     # Download the file if it does not exist already
-#     if not os.path.exists(outfp):
-#         print("Downloading", fname)
-#         r = urllib.request.urlretrieve(url, outfp)
+# Download files
+for url in url_list:
+    # Parse filename
+    fname = get_filename(url)
+    outfp = os.path.join(outdir, fname)
+    # Download the file if it does not exist already
+    if not os.path.exists(outfp):
+        print("Downloading", fname)
+        r = urllib.request.urlretrieve(url, outfp)
 
 # Read FIRMS data
-df = pd.read_csv(outdir + "SUOMI_VIIRS_C2_Europe_7d.csv")
+df = pd.read_csv(outdir + "SUOMI_VIIRS_C2_Europe_24h.csv")
 
 # Normalize brightness
 df['bright_ti4'] =  df['bright_ti4']/df['bright_ti4'].max()
@@ -73,4 +73,4 @@ for i in range(len(df)):
 # colormap.add_to(m)
 
 # Save map as html file
-m.save('C:\\Users\\JohannesWilbertz\\OneDrive - Ksilink\\ML_learning\\Ukraine Fire Map\\FIRMS.html')
+m.save('C:\\Users\\JohannesWilbertz\\OneDrive - Ksilink\\Image-Data-Analysis\\Python\Map_Plotting\\Map_Plotting\\FIRMS.html')
